@@ -22,7 +22,13 @@ function SignUp(props) {
     }
     const handleSubmit=(e)=>{
         e.preventDefault()
-        firebase.signUpUser(email, password).then(user=>{
+        firebase.signUpUser(email, password).then(authUser =>{
+            console.log(authUser)
+            return firebase.user(authUser.user.uid).set({
+                pseudo,
+                email
+            })
+        }).then(user=>{
             setLoginData({...data})
             props.history.push('/Welcome')
         }).catch(error=>{
@@ -73,3 +79,4 @@ function SignUp(props) {
 }
 
 export default SignUp
+/* */
