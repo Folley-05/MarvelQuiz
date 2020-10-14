@@ -1,1 +1,8 @@
-les classe interessantes
+les classes css interessantes
+
+- loader : pour le chargement
+- inputBox : la div des inputBox
+- formBoxLeftLogin : une des div qui contient les image de fond
+- formBoxRight : la div aligne le formulaire a droite
+- formContent : la div qui contient les formulaires
+- logoutContainer : div qui contient le logoutContainer
