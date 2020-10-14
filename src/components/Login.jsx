@@ -60,6 +60,9 @@ function Login(props) {
                         <div className="linkContainer">
                             <Link className="simpleLink" to="/signUp">nouveau sur Marvel quiz? inscrivez vous maintenant</Link>
                         </div>
+                        <div className="linkContainer">
+                            <Link className="simpleLink" to="/forgetpassword">mot de passe oublie?</Link>
+                        </div>
                     </div>
                 </div>
             </div>

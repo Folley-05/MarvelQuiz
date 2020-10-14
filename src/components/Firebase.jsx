@@ -29,6 +29,8 @@ class Firebase {
     //methode de deconnexion
     signOutUser=()=>this.auth.signOut()
 
+    //recuperer le mot de passe
+    passwordReset=email=>this.auth.sendPasswordResetEmail(email)
 
 }
 
