@@ -27,7 +27,6 @@ function Welcome(props) {
                 listener()
             }
     },[userSession])
-
     return userSession===null ? (
                 <><div className="loader"></div><p>Loading... </p></>
             ) : (
