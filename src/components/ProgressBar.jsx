@@ -1,17 +1,24 @@
 import React from 'react'
+import { act } from 'react-dom/test-utils'
 
-const ProgressBar = () => {
+const ProgressBar = (props) => {
+    const {id, max}=props
+    const actualQuestion=id+1
+    const getWidth=()=>{
+        return   actualQuestion*100/max
+    }
+    console.log(getWidth())
     return (
        <> 
             <div className="percentage">
-                <div className="progressPercent"> Question 1/10 </div>
-                <div className="progressPercent">pourcentage : 10% </div>
+                <div className="progressPercent"> {`Question ${actualQuestion}/${max}`} </div>
+                <div className="progressPercent">pourcentage : {getWidth()}% </div>
             </div>
             <div className="progress-bar">
-                <div className="progressBarChange" style={{width: "10%", marginTop: 10}} ></div>
+                <div className="progressBarChange" style={{width: `${getWidth()}%`, marginTop: 10}} ></div>
             </div>
         </>
     )
 }
 
-export default ProgressBar
+export default React.memo(ProgressBar)
