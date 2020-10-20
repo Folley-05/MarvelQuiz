@@ -20,7 +20,7 @@ function Logout() {
                 <input id="check" type="checkbox" checked={checked} onChange={handleChange} />
                 <a data-tip data-for='deconnexion'> <span className="slider round"></span></a>
                 <ReactTooltip id='deconnexion' type='error'>
-                    <span>deconnexion</span>
+                    <span>se deconnecter</span>
                 </ReactTooltip>
             </label>
         </div>
