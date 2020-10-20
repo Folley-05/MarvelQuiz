@@ -7,7 +7,6 @@ const ProgressBar = (props) => {
     const getWidth=()=>{
         return   actualQuestion*100/max
     }
-    console.log(getWidth())
     return (
        <> 
             <div className="percentage">

@@ -1,5 +1,6 @@
 import React from 'react';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
+import {IconContext} from 'react-icons'
 
 import Header from './Header'
 import Landing from './Landing'
@@ -15,16 +16,18 @@ import '../App.css'
 function App() {
   return (
       <Router>
-          <Header />
-          <Switch>
-            <Route exact path="/" component={Landing } />
-            <Route exact path="/Welcome" component={Welcome} />
-            <Route exact path="/SignUp" component={SignUp} />
-            <Route exact path="/Login" component={Login} />
-            <Route exact path="/forgetpassword" component={ForgetPasword} />
-            <Route component={ErrorPage} />
-          </Switch>
-          <Footer />
+        <IconContext.Provider value={{ style: { verticalAlign: 'middle' } }}>
+            <Header />
+            <Switch>
+              <Route exact path="/" component={Landing } />
+              <Route exact path="/Welcome" component={Welcome} />
+              <Route exact path="/SignUp" component={SignUp} />
+              <Route exact path="/Login" component={Login} />
+              <Route exact path="/forgetpassword" component={ForgetPasword} />
+              <Route component={ErrorPage} />
+            </Switch>
+            <Footer />
+          </IconContext.Provider>
       </Router>
   );
 }

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react'
+import ReactTooltip from 'react-tooltip'
 import { Context  } from './Context'
 
 function Logout() {
@@ -17,7 +18,10 @@ function Logout() {
         <div className="logoutContainer">
             <label htmlFor="check" className="switch">
                 <input id="check" type="checkbox" checked={checked} onChange={handleChange} />
-                <span className="slider round"></span>
+                <a data-tip data-for='deconnexion'> <span className="slider round"></span></a>
+                <ReactTooltip id='deconnexion' type='error'>
+                    <span>deconnexion</span>
+                </ReactTooltip>
             </label>
         </div>
     )

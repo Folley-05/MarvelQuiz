@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react"
+import {GiTrophyCup} from 'react-icons/gi'
 
 const QuizOver= React.forwardRef((props, ref)=>{
-    var {levelsNames, level, max, score }=props.state
+    var {levelsNames, level, max, score, level }=props.state
+    const { loadNextLevel }=props
     const[asked, setAsked]=useState([])
+    //console.log(level)
     useEffect(()=>{
         setAsked(ref.current)
     }, [ref])
@@ -13,8 +16,7 @@ const QuizOver= React.forwardRef((props, ref)=>{
             <td><button className="btnInfo">infos</button></td>
         </tr>
     )
-    score=5
-    level=2
+    //score+=4
     const average=max/2
     const decision=score>=average ? (
         <>
@@ -23,12 +25,12 @@ const QuizOver= React.forwardRef((props, ref)=>{
                     level<levelsNames.length ? (
                         <>
                             <p className="successMsg">felicitation, passer au niveau suivant</p>
-                            <button className="btnResult successMsg">niveau suivant</button>
+                            <button className="btnResult successMsg" onClick={()=>loadNextLevel(level)}>niveau suivant</button>
                         </>
                     ) : (
                         <>
-                            <p className="successMsg">bravo, vous etes un expert</p>
-                            <button className="btnResult gameOver">revenir a l'accueil</button>
+                            <p className="successMsg"><GiTrophyCup size={"2em"} /> bravo, vous etes un expert</p>
+                            <button className="btnResult gameOver" onClick={()=>loadNextLevel(0)}>revenir a l'accueil</button>
                         </>
                     )
                 }
@@ -37,9 +39,17 @@ const QuizOver= React.forwardRef((props, ref)=>{
     ) : (
         <>
             <p className="failureMsg">vous avez echoue</p>
+            <div className="loader"></div>
         </>
     )
     
+    if(score<average) {
+
+        console.log(level)
+        setTimeout(()=>{
+            loadNextLevel(level-1)
+        }, 5000)
+    }
 
 
     return (

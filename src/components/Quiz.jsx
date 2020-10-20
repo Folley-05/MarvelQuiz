@@ -4,6 +4,7 @@ import ProgressBar from './ProgressBar'
 import {QuizMarvel} from './Questions'
 import { toast } from 'react-toastify';
 import QuizOver from './QuizOver'
+import { FaChevronRight } from "react-icons/fa";
 
 
 import 'react-toastify/dist/ReactToastify.min.css';
@@ -19,7 +20,7 @@ export class Quiz extends Component {
         storeQuestions: [],
         question: null,
         options: [],
-        idQuestion: 8,
+        idQuestion: 0,
         disabled: 1,
         userAnswer: null,
         score: 0,
@@ -37,7 +38,7 @@ export class Quiz extends Component {
     showToast=pseudo=>{
         toast.info(`bienvenu a toi ${pseudo}`, {
             position: "top-right",
-            autoClose: 5000,
+            autoClose: 2000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
@@ -48,7 +49,7 @@ export class Quiz extends Component {
     showToastSuccess=()=>{
         toast.success('felicitation', {
             position: "top-right",
-            autoClose: 5000,
+            autoClose: 2000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
@@ -60,7 +61,7 @@ export class Quiz extends Component {
     showToastError=()=>{
         toast.error("rate c'est dommage", {
             position: "top-right",
-            autoClose: 5000,
+            autoClose: 3000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
@@ -114,7 +115,18 @@ export class Quiz extends Component {
     gameOver=()=>{
         let a=this.state
         a.gameOver=true
+        a.level+=1
         this.setState(a)
+    }
+    nextLevel=param=>{
+        let a=this.state
+        a.gameOver=false
+        a.idQuestion=0
+        a.score=0
+        a.level=param
+        this.setState(a)
+        console.log(this.state.levelsNames.length,this.state.level)
+        this.loadQuestions(this.state.levelsNames[param])
     }
 
     render() {
@@ -122,14 +134,14 @@ export class Quiz extends Component {
         const {storeQuestions, question, options}=this.state
         const proposition=options.map(
                     (option, index)=>
-                    <p key={index} className={`answerOptions ${option===this.state.userAnswer? "selected" : null}`} onClick={()=>{this.submitAnswers(option)}}>{option}</p>
+                    <p key={index} className={`answerOptions ${option===this.state.userAnswer? "selected" : null}`} onClick={()=>{this.submitAnswers(option)}}><FaChevronRight/> {option}</p>
                     )
 
         const {pseudo}=this.props.userData
         if(!this.state.gameOver) {
             return (
                 <div>
-                    <Level />
+                    <Level level={this.state.level} levelsNames={this.state.levelsNames}/>
                     <ProgressBar id={this.state.idQuestion} max={this.state.max} />
                     <h2>{question}</h2>
                     <div className="answerContainer">
@@ -151,7 +163,7 @@ export class Quiz extends Component {
         else {
             return(
                 <div className="">
-                    <QuizOver ref={this.data} state={this.state} />
+                    <QuizOver ref={this.data} state={this.state} loadNextLevel={this.nextLevel} />
                 </div>
             )
         }
