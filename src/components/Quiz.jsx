@@ -20,7 +20,7 @@ export class Quiz extends Component {
         storeQuestions: [],
         question: null,
         options: [],
-        idQuestion: 0,
+        idQuestion: 8,
         disabled: 1,
         userAnswer: null,
         score: 0,
@@ -121,7 +121,7 @@ export class Quiz extends Component {
     nextLevel=param=>{
         let a=this.state
         a.gameOver=false
-        a.idQuestion=0
+        a.idQuestion=8
         a.score=0
         a.level=param
         this.setState(a)
