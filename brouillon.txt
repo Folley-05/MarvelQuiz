@@ -14,3 +14,16 @@ a1493eed7ce371aad35d555424a7c82f
 
 ma cle prive sur marvel
 3ea4c007d6619be69ea816a5a2a5c4945ab53d02
+
+Authentification pour les applications côté serveur
+Les applications côté serveur doivent transmettre deux paramètres en plus du paramètre apikey:
+
+ts - un horodatage (ou une autre longue chaîne qui peut changer sur une base de demande par demande)
+hash - un condensé md5 du paramètre ts, de votre clé privée et de votre clé publique (par exemple md5 (ts + privateKey + publicKey)
+Par exemple, un utilisateur avec une clé publique de «1234» et une clé privée de «abcd» pourrait construire un appel valide comme suit: 
+http://gateway.marvel.com/v1/public/comics?ts=1&apikey=1234&hash=ffd275c5130566a2916217b101f26150 
+(la valeur de hachage est le résumé md5 de 1abcd1234)
+
+
+http://gateway.marvel.com/v1/public/characters?
+ts=1&apikey=a1493eed7ce371aad35d555424a7c82f&hash=9c93231bdf1c2c6c77adab59927bb13f
