@@ -12,25 +12,38 @@ const QuizOver= React.forwardRef((props, ref)=>{
     const[modal, openModal]=useState(false)
     const[data, setData]=useState([])
     const[loader, setLoader]=useState(true)
-    //console.log(level)
     useEffect(()=>{
-        setAsked(ref.current)
-    }, [ref])
+            setAsked(ref.current)
+            checkDate()
+    },[ref])
+
+    const checkDate=()=>{
+        if(localStorage.getItem('dataDate')) {
+            const prevDate=localStorage.getItem('dataDate')
+            const nowDate=Date.now()
+            const diff=nowDate-prevDate
+            if(diff/(1000*3600*24)>=15)
+            localStorage.clear()
+        }
+    }
     const showModal=id=>{
         openModal(true)
-         Axios.get(`https://gateway.marvel.com/v1/public/characters/1009362?ts=1&apikey=a1493eed7ce371aad35d555424a7c82f&hash=9c93231bdf1c2c6c77adab59927bb13f`).then(
-            response=>{
-                console.log(response.data)
-                setData(response.data)
-                setLoader(false)
-                //console.log(data)
-            }
-            ).catch(
-                error=>console.log(error)
+        getData(id)
+    }
+    const getData=id=>{
+        if(localStorage.getItem(id)) {
+            let localData=JSON.parse(localStorage.getItem(id))
+            setData(localData)
+            setLoader(false)
+        } else {
+            Axios.get(`https://gateway.marvel.com/v1/public/characters/${id}?ts=1&apikey=${key}&hash=${hash}`).then(
+                response=>{
+                    localStorage.setItem(id, JSON.stringify(response.data))
+                    localStorage.setItem('dataDate', Date.now())
+                }
+                ).catch(error=>console.log(error)
             )
-            /* setTimeout(()=>{
-                setLoader(false)
-            }, 2000) */
+        }
     }
     const hideModal=()=>{
         openModal(false)
@@ -94,7 +107,7 @@ const QuizOver= React.forwardRef((props, ref)=>{
             <button className="modalBtn" onClick={hideModal}>Fermer</button>
         </div> </>
     ) : (
-        <><div className="modalHeader">
+        <><div className="modalHeader" onClick={hideModal}>
             <h2>Recuperation des donnees ...</h2>
         </div>
         <div className="modalBody">
