@@ -23,7 +23,6 @@ function SignUp(props) {
     const handleSubmit=(e)=>{
         e.preventDefault()
         firebase.signUpUser(email, password).then(authUser =>{
-            console.log(authUser)
             return firebase.user(authUser.user.uid).set({
                 pseudo,
                 email

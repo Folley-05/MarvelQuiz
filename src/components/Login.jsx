@@ -30,7 +30,6 @@ function Login(props) {
             props.history.push('/Welcome')
             setPassword('')
             setEmail('')
-            console.log(user)
         }).catch(error=>{
             setPassword('')
             setEmail('')

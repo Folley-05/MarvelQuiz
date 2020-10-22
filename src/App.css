@@ -187,6 +187,7 @@ footer {
   padding: 20px 0;
   padding: 20px 0;
   flex: 0 1 80%;
+  text-align: center;
 }
 
 .footer-container p {

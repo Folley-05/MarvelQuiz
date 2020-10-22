@@ -20,20 +20,31 @@ export class Quiz extends Component {
         storeQuestions: [],
         question: null,
         options: [],
-        idQuestion: 8,
+        idQuestion: 0,
         disabled: 1,
         userAnswer: null,
         score: 0,
         gameOver: false
 
     }
+    showPseudo=1
     goodAnswer=null
     data=React.createRef()
     qst=null
     componentDidMount() {
         this.loadQuestions(this.state.levelsNames[this.state.level])
-        this.showToast(this.props.userData.pseudo)
+        console.log("je suis monte", this.props.userData)
         
+        
+    }
+    componentDidUpdate() {
+        this.showPseudoToast(this.props.userData.pseudo)
+    }
+    showPseudoToast=(pseudo)=>{
+        if(this.showPseudo && pseudo) {
+            this.showToast(this.props.userData.pseudo)
+            this.showPseudo =0
+        }
     }
     showToast=pseudo=>{
         toast.info(`bienvenu a toi ${pseudo}`, {
@@ -121,11 +132,10 @@ export class Quiz extends Component {
     nextLevel=param=>{
         let a=this.state
         a.gameOver=false
-        a.idQuestion=8
+        a.idQuestion=0
         a.score=0
         a.level=param
         this.setState(a)
-        console.log(this.state.levelsNames.length,this.state.level)
         this.loadQuestions(this.state.levelsNames[param])
     }
 
@@ -137,7 +147,6 @@ export class Quiz extends Component {
                     <p key={index} className={`answerOptions ${option===this.state.userAnswer? "selected" : null}`} onClick={()=>{this.submitAnswers(option)}}><FaChevronRight/> {option}</p>
                     )
 
-        const {pseudo}=this.props.userData
         if(!this.state.gameOver) {
             return (
                 <div>

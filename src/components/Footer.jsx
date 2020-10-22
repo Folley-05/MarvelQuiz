@@ -4,7 +4,7 @@ function Footer() {
     return (
         <footer >
             <div className="footer-container">
-                <p style={{fontSize: 15}}>Un Projet realise par DonkeyGeek-2020</p>
+                <p style={{fontSize: "1.4em"}}>Application realisee par Folley suivant le tuto de DonkeyGeek-2020</p>
                 <p>Les icones des personnages marvel sont prises sur iconFinder.com</p>
             </div>
         </footer>

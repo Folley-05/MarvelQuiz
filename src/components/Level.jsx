@@ -9,7 +9,6 @@ const Level = (props) => {
         namesLevels=levelsNames.map(name=>({title: name.toUpperCase()}))
         setNames(namesLevels)
     },[])
-    console.log()
     return (
         <div className="levelsContainer">
                 <Stepper steps={names}

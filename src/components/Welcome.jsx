@@ -12,13 +12,14 @@ function Welcome(props) {
         let listener=firebase.auth.onAuthStateChanged(user=>{
             user ? setUserSession(user) : props.history.push('/')
         })
-        if(!!userSession) {
+        if(userSession) {
             firebase.user(userSession.uid).get().then(
                 doc=>{
                     if(doc && doc.exists) {
                         const myData=doc.data()
                         setUserData(myData)
                     }
+
                 }
             ).catch(error=>console.log(error))
         }
@@ -31,11 +32,11 @@ function Welcome(props) {
                 <><div className="loader"></div><p>Loading... </p></>
             ) : (
                 <div className="quiz-bg">
-            <div className="container">
-                <Logout />
-                <Quiz userData={userData} />
-            </div>
-        </div>
+                    <div className="container">
+                        <Logout />
+                        <Quiz userData={userData} />
+                    </div>
+                </div>
             )
 
     

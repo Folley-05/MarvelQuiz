@@ -27,3 +27,8 @@ http://gateway.marvel.com/v1/public/comics?ts=1&apikey=1234&hash=ffd275c5130566a
 
 http://gateway.marvel.com/v1/public/characters?
 ts=1&apikey=a1493eed7ce371aad35d555424a7c82f&hash=9c93231bdf1c2c6c77adab59927bb13f
+
+https://gateway.marvel.com/v1/public/characters/1009363?apikey=a1493eed7ce371aad35d555424a7c82f
+
+addresse de l'appli 
+https://marvel-quiz-8b723.web.app

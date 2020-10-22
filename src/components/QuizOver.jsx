@@ -40,6 +40,7 @@ const QuizOver= React.forwardRef((props, ref)=>{
                 response=>{
                     localStorage.setItem(id, JSON.stringify(response.data))
                     localStorage.setItem('dataDate', Date.now())
+                    setLoader(false)
                 }
                 ).catch(error=>console.log(error)
             )
@@ -56,7 +57,7 @@ const QuizOver= React.forwardRef((props, ref)=>{
             <td><button className="btnInfo" onClick={()=>showModal(detail.heroId)}>infos</button></td>
         </tr>
     )
-    score+=4
+    //score+=4
     const average=max/2
     const decision=score>=average ? (
         <>
@@ -85,7 +86,6 @@ const QuizOver= React.forwardRef((props, ref)=>{
     
     if(score<average) {
 
-        console.log(level)
         setTimeout(()=>{
             loadNextLevel(level-1)
         }, 5000)
@@ -98,9 +98,18 @@ const QuizOver= React.forwardRef((props, ref)=>{
         <div className="modalBody">
             <div className="comicImage">
                 <img src={data.data.results[0].thumbnail.path+'.'+data.data.results[0].thumbnail.extension} alt=""/>
+                <p>{data.attributionText}<br/> {data.copyright} </p>
             </div>
             <div className="comicDetails">
-                {data.data.results[0].description}
+                <h3>description</h3>
+                <p>{data.data.results[0].description ? data.data.results[0].description : "description indisponible"}</p>
+                <h3>plus d'infos</h3>
+                {
+                    data.data.results[0].urls &&
+                    data.data.results[0].urls.map((url, i)=>{
+                        return <a keu={i} href={url.url} target="_blank">{url.type}</a>
+                    })
+                }
             </div>
         </div>
         <div className="modalFooter">
